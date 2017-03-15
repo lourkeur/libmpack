@@ -50,6 +50,13 @@ describe('mpack', function()
       unpack = mpack.Unpacker()
     end)
 
+    describe('issue #23', function()
+      it('does NOT occur when using the lua binding', function()
+        unpacked, pos = unpack(fhex('81 c3 c3'))
+        assert.are_same({[true]=true}, unpacked)
+      end)
+    end)
+
     describe('a msgpack chunk', function()
       it('returns object and consumed count', function()
         unpacked, pos = unpack(msgpack)
